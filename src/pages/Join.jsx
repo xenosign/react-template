@@ -8,9 +8,13 @@ import Footer from '../components/Footer';
 import { lightBlue } from '@mui/material/colors';
 
 export default function Join() {
-  const userEmail = useRef();
-  const userPw = useRef();
-  const userNickName = useRef();
+  let userEmail = '';
+  let userPassword = '';
+  let userNickName = '';
+
+  function checkUserInput() {
+    console.log(userEmail, userPassword, userNickName);
+  }
 
   return (
     <>
@@ -38,7 +42,9 @@ export default function Join() {
                   label="이메일"
                   autoFocus
                   autoComplete="off"
-                  ref={userEmail}
+                  onChange={(input) => {
+                    userEmail = input.target.value;
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -48,6 +54,9 @@ export default function Join() {
                   fullWidth
                   label="비밀번호"
                   type="password"
+                  onChange={(input) => {
+                    userPassword = input.target.value;
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -60,14 +69,22 @@ export default function Join() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField name="닉네임" required fullWidth label="닉네임" />
+                <TextField
+                  name="닉네임"
+                  required
+                  fullWidth
+                  label="닉네임"
+                  onChange={(input) => {
+                    userNickName = input.target.value;
+                  }}
+                />
               </Grid>
             </Grid>
             <LoadingButton
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor: lightBlue[700], height: '3.5em' }}
+              onClick={() => checkUserInput()}
             >
               회원 가입
             </LoadingButton>
