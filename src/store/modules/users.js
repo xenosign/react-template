@@ -1,14 +1,12 @@
 // 액션 타입(문자열)
 const LOGIN = 'user/LOGIN';
 const LOGOUT = 'user/LOGOUT';
-const REGISTER = 'user/RESISTER';
 
 // 액션 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달 필요
-export function login(result) {
+export function login() {
   return {
     type: LOGIN,
-    payload: { result },
   };
 }
 
@@ -18,17 +16,9 @@ export function logout() {
   };
 }
 
-export function register() {
-  return {
-    type: REGISTER,
-  };
-}
-
 // 초기 상태 설정
 const initState = {
-  userEmail: '',
-  userNickName: '',
-  isLogin: false, // 0: 인트로 페이지, 1 ~ n: 선택 페이지, n+1: 결과 페이지
+  isLogin: false,
 };
 
 // 리듀서
@@ -37,17 +27,12 @@ export default function users(state = initState, action) {
     case LOGIN:
       return {
         ...state,
+        isLogin: true,
       };
     case LOGOUT:
       return {
         ...state,
-        page: state.page + 1,
-      };
-    case REGISTER:
-      return {
-        ...state,
-        page: 0,
-        mbtiResult: '',
+        isLogin: false,
       };
     default:
       return state;

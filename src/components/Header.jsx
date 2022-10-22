@@ -15,9 +15,10 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { purple } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
-const navItems = [
+let navItems = [
   { text: 'Home', href: '/' },
   { text: 'Item', href: '/item' },
   { text: 'SignUp', href: '/join' },
@@ -25,6 +26,22 @@ const navItems = [
 ];
 
 export default function Header(props) {
+  const login = useSelector((state) => state.users.isLogin);
+  const [isLogin, setIsLogin] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsLogin(login);
+  });
+
+  if (isLogin) {
+    navItems = [
+      { text: 'Home', href: '/' },
+      { text: 'Item', href: '/item' },
+      { text: 'SignUp', href: '/join' },
+      { text: 'Logout', href: '/logout' },
+    ];
+  }
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
