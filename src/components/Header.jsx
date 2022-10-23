@@ -26,19 +26,20 @@ let navItems = [
 ];
 
 export default function Header(props) {
-  const login = useSelector((state) => state.users.isLogin);
-  const [isLogin, setIsLogin] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsLogin(login);
-  });
+  const isLogin = useSelector((state) => state.users.isLogin);
 
   if (isLogin) {
     navItems = [
       { text: 'Home', href: '/' },
       { text: 'Item', href: '/item' },
-      { text: 'SignUp', href: '/join' },
       { text: 'Logout', href: '/logout' },
+    ];
+  } else {
+    navItems = [
+      { text: 'Home', href: '/' },
+      { text: 'Item', href: '/item' },
+      { text: 'SignUp', href: '/join' },
+      { text: 'LogIn', href: '/login' },
     ];
   }
 

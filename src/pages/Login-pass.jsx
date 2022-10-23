@@ -1,11 +1,11 @@
-import { Avatar, Grid, TextField, Typography } from '@mui/material';
+import { Avatar, Grid, TextField, Typography, Divider } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Container } from '@mui/system';
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { orange } from '@mui/material/colors';
+import { lightBlue, orange } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PopupDialog from '../components/PopupDialog';
 import { useDispatch } from 'react-redux';
@@ -45,6 +45,7 @@ export default function Login() {
 
       if (response.status === 200) {
         const result = await response.json();
+        console.log(result);
         if (result.result) {
           dispatch(login(result));
         }
@@ -60,6 +61,10 @@ export default function Login() {
       }
     } else {
     }
+  }
+
+  async function googleLogin() {
+    const response = await fetch('http://localhost:3500/users/auth/google');
   }
 
   const theme = createTheme({
@@ -143,13 +148,79 @@ export default function Login() {
                   </Link>
                 </Grid>
               </Grid>
+              <Divider variant="middle" sx={{ mt: 3 }} />
+              <LoadingButton
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: '#eee',
+                  height: '3.5em',
+                  color: 'black',
+                  ':hover': {
+                    bgcolor: 'white', // theme.palette.primary.main
+                    fontWeight: 'bold',
+                  },
+                }}
+                onClick={() => googleLogin()}
+              >
+                구글 로그인
+              </LoadingButton>
+              <LoadingButton
+                fullWidth
+                variant="contained"
+                sx={{
+                  mb: 2,
+                  bgcolor: '#2db400',
+                  height: '3.5em',
+                  ':hover': {
+                    bgcolor: '#53e622', // theme.palette.primary.main
+                    fontWeight: 'bold',
+                  },
+                }}
+                onClick={() => loginUser()}
+              >
+                네이버 로그인
+              </LoadingButton>
+              <LoadingButton
+                fullWidth
+                variant="contained"
+                sx={{
+                  mb: 2,
+                  bgcolor: '#F7E600',
+                  height: '3.5em',
+                  color: 'black',
+                  ':hover': {
+                    bgcolor: '#fff129', // theme.palette.primary.main
+                    fontWeight: 'bold',
+                  },
+                }}
+                onClick={() => loginUser()}
+              >
+                카카오 로그인
+              </LoadingButton>
+              <LoadingButton
+                fullWidth
+                variant="contained"
+                sx={{
+                  mb: 2,
+                  bgcolor: '#3b5998',
+                  height: '3.5em',
+                  ':hover': {
+                    bgcolor: lightBlue[700], // theme.palette.primary.main
+                    fontWeight: 'bold',
+                  },
+                }}
+                onClick={() => loginUser()}
+              >
+                페이스북 로그인
+              </LoadingButton>
             </Box>
           </Box>
         </ThemeProvider>
       </Container>
       <Footer />
-
-      {/* Dialog 파트 */}
       {openDialog && (
         <PopupDialog
           msg={loginCondition.msg}

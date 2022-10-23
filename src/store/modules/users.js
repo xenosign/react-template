@@ -4,9 +4,10 @@ const LOGOUT = 'user/LOGOUT';
 
 // 액션 생성 함수
 // payload -> 선택에 다른 결과 값 result 전달 필요
-export function login() {
+export function login(loginInfo) {
   return {
     type: LOGIN,
+    payload: loginInfo,
   };
 }
 
@@ -18,6 +19,7 @@ export function logout() {
 
 // 초기 상태 설정
 const initState = {
+  userEmail: '',
   isLogin: false,
 };
 
@@ -27,6 +29,8 @@ export default function users(state = initState, action) {
     case LOGIN:
       return {
         ...state,
+        userEmail: action.payload.email,
+        userNickName: action.payload.nickName,
         isLogin: true,
       };
     case LOGOUT:

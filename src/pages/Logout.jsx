@@ -8,16 +8,13 @@ import { orange } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/modules/users';
-import { useState } from 'react';
 
 export default function Logout() {
-  const [logouted, setLogout] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function logoutUser() {
     dispatch(logout());
-    setLogout(true);
     navigate('/');
   }
 
