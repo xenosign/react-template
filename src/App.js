@@ -11,6 +11,7 @@ function App() {
   const isLogin = useSelector((state) => state.users.isLogin);
 
   return (
+    // 각 주소에 따른 라우팅 처리
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/item" element={isLogin ? <Item /> : <NotLogin />} />

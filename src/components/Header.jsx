@@ -26,8 +26,10 @@ let navItems = [
 ];
 
 export default function Header(props) {
+  // 해당 헤더 메뉴가 렌더링 될 때마다 redux 의 값을 체크
   const isLogin = useSelector((state) => state.users.isLogin);
 
+  // 로그인 여부에 따라 Header 의 메뉴를 변경
   if (isLogin) {
     navItems = [
       { text: 'Home', href: '/' },

@@ -11,11 +11,15 @@ import PopupDialog from '../components/PopupDialog';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/users';
 
+// 로그인 용 컴포넌트
 export default function Login() {
+  // 회원 가입과 비슷하게 로그인 상태에 따라 컴포넌트 및 Dialog 처리
   const [loginCondition, setLoginCondition] = useState({
     condition: false,
     msg: '회원 정보를 정확하게 입력하세요!',
   });
+
+  // Dialog 를 띄워주는 state
   const [openDialog, setOpenDialog] = useState(false);
 
   const dispatch = useDispatch();
@@ -23,18 +27,22 @@ export default function Login() {
   const userEmailInput = useRef();
   const userPasswordInput = useRef();
 
+  // 로그인 호출 함수
   async function loginUser() {
     setOpenDialog(false);
 
+    // 유저 input 으로 받은 정보를 백엔드 서버에 전달 하기 위해 임의의 객체 생성
     const loginInfo = {
       email: userEmailInput.current.value,
       password: userPasswordInput.current.value,
     };
 
+    // 여기도 Validation 추가 필요, 일단 빈 값만 아니면 작동하도록 설정
     if (
       userEmailInput.current.value !== '' &&
       userPasswordInput.current.value !== ''
     ) {
+      // 입력 받은 값을 백엔드 서버로 전달
       const response = await fetch('http://localhost:3500/users/login ', {
         method: 'POST',
         headers: {
@@ -43,9 +51,12 @@ export default function Login() {
         body: JSON.stringify(loginInfo),
       });
 
+      // 백 엔드 서버의 응답에 따라 처리
       if (response.status === 200) {
         const result = await response.json();
         if (result.result) {
+          // 백엔드에서 결과가 true(= 로그인 성공) 가 오면 Redux 의 login 함수를 호출하여
+          // 로그인 처리
           dispatch(login(result));
         }
 
