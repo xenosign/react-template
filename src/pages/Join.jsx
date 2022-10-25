@@ -1,8 +1,8 @@
-import { Avatar, Grid, TextField, Typography, Button } from '@mui/material';
+import { Avatar, Grid, TextField, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Container } from '@mui/system';
 import React, { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { lightBlue } from '@mui/material/colors';
@@ -45,6 +45,7 @@ export default function Join() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          type: 'local',
           email: userEmailInput.current.value,
           password: userPasswordInput.current.value,
           nickName: userNickNameInput.current.value,

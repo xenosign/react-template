@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import KakaoRedirectHandler from './components/KakaoRedirectHandler';
 import Index from './pages/Index';
 import Item from './pages/Item';
 import Join from './pages/Join';
@@ -19,6 +20,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/notLogin" element={<NotLogin />} />
+      <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
     </Routes>
   );
 }

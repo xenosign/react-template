@@ -10,9 +10,15 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PopupDialog from '../components/PopupDialog';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/users';
-import { GoogleLogin } from '@react-oauth/google';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { getDecodedGoogleJWT } from '../modules/decode';
+import kakao from '../images/kakao.png';
+import naver from '../images/naver.png';
+import google from '../images/google.png';
+
+// KAKAO 로그인 용
+// CLIENT_ID 로 REST API 키 사용 필요
+const KAKAO_CLIENT_ID = '2be90ab71a1f36d735f12cd91b53a982';
+const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 export default function Login() {
   const [loginCondition, setLoginCondition] = useState({
@@ -65,10 +71,6 @@ export default function Login() {
       }
     } else {
     }
-  }
-
-  async function googleLogin() {
-    navigate('http://localhost:3500/login/auth/google');
   }
 
   const theme = createTheme({
@@ -153,87 +155,53 @@ export default function Login() {
                 </Grid>
               </Grid>
               <Divider variant="middle" sx={{ mt: 3 }} />
-
-              <GoogleOAuthProvider clientId="1056175725104-vg3onfaha901bd9t083dl2jhmfn7u1bh.apps.googleusercontent.com">
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    console.log(credentialResponse);
-                  }}
-                  onError={(response) => {
-                    console.log(response);
-                  }}
-                />
-              </GoogleOAuthProvider>
-
-              <LoadingButton
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  bgcolor: '#eee',
-                  height: '3.5em',
-                  color: 'black',
-                  ':hover': {
-                    bgcolor: 'white', // theme.palette.primary.main
-                    fontWeight: 'bold',
-                  },
-                }}
-                onClick={() => googleLogin()}
-              >
-                <a href="http://localhost:3500/users/auth/google">
-                  구글 로그인
+              <Grid container justifyContent="center">
+                {/* 카카오 로그인 */}
+                <a href={KAKAO_AUTH_URL}>
+                  <Box
+                    component="div"
+                    sx={{
+                      mt: 2,
+                      backgroundImage: `url(${kakao})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      width: '300px',
+                      height: '45px',
+                      color: 'black',
+                    }}
+                  ></Box>
                 </a>
-              </LoadingButton>
-              <LoadingButton
-                fullWidth
-                variant="contained"
-                sx={{
-                  mb: 2,
-                  bgcolor: '#2db400',
-                  height: '3.5em',
-                  ':hover': {
-                    bgcolor: '#53e622', // theme.palette.primary.main
-                    fontWeight: 'bold',
-                  },
-                }}
-                onClick={() => loginUser()}
-              >
-                네이버 로그인
-              </LoadingButton>
-              <LoadingButton
-                fullWidth
-                variant="contained"
-                sx={{
-                  mb: 2,
-                  bgcolor: '#F7E600',
-                  height: '3.5em',
-                  color: 'black',
-                  ':hover': {
-                    bgcolor: '#fff129', // theme.palette.primary.main
-                    fontWeight: 'bold',
-                  },
-                }}
-                onClick={() => loginUser()}
-              >
-                카카오 로그인
-              </LoadingButton>
-              <LoadingButton
-                fullWidth
-                variant="contained"
-                sx={{
-                  mb: 2,
-                  bgcolor: '#3b5998',
-                  height: '3.5em',
-                  ':hover': {
-                    bgcolor: lightBlue[700], // theme.palette.primary.main
-                    fontWeight: 'bold',
-                  },
-                }}
-                onClick={() => loginUser()}
-              >
-                페이스북 로그인
-              </LoadingButton>
+                {/* 네이버 로그인 */}
+                <Link to="href">
+                  <Box
+                    component="div"
+                    sx={{
+                      mt: 2,
+                      backgroundImage: `url(${naver})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      width: '300px',
+                      height: '80px',
+                      color: 'black',
+                    }}
+                  ></Box>
+                </Link>
+                {/* 구글 로그인 */}
+                <Link to="href">
+                  <Box
+                    component="div"
+                    sx={{
+                      mt: 2,
+                      backgroundImage: `url(${google})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      width: '300px',
+                      height: '70px',
+                      color: 'black',
+                    }}
+                  ></Box>
+                </Link>
+              </Grid>
             </Box>
           </Box>
         </ThemeProvider>
