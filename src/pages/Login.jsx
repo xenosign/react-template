@@ -10,6 +10,9 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PopupDialog from '../components/PopupDialog';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/modules/users';
+import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { getDecodedGoogleJWT } from '../modules/decode';
 
 export default function Login() {
   const [loginCondition, setLoginCondition] = useState({
@@ -150,6 +153,18 @@ export default function Login() {
                 </Grid>
               </Grid>
               <Divider variant="middle" sx={{ mt: 3 }} />
+
+              <GoogleOAuthProvider clientId="1056175725104-vg3onfaha901bd9t083dl2jhmfn7u1bh.apps.googleusercontent.com">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    console.log(credentialResponse);
+                  }}
+                  onError={(response) => {
+                    console.log(response);
+                  }}
+                />
+              </GoogleOAuthProvider>
+
               <LoadingButton
                 fullWidth
                 variant="contained"
