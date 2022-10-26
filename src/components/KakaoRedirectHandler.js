@@ -1,3 +1,54 @@
+// import { useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+
+// export default function KakaoRedirectHandler() {
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const CODE = new URL(window.location.href).searchParams.get('code');
+//     console.log(CODE);
+
+//     const GRANT_TYPE = 'authorization_code';
+//     // REST API 키를 입력 해야 합니다!
+//     const KAKAO_CLIENT_ID = '2be90ab71a1f36d735f12cd91b53a982';
+//     const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+
+//     async function loginFetch() {
+//       const tokenResponse = await fetch(
+//         `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${CODE}`,
+//         {
+//           method: 'POST',
+//           headers: {
+//             'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+//           },
+//         }
+//       );
+
+//       if (tokenResponse.status === 200) {
+//         const token = await tokenResponse.json();
+//         console.log(token);
+
+//         const userResponese = await fetch(`https://kapi.kakao.com/v2/user/me`, {
+//           method: 'POST',
+//           headers: {
+//             Authorization: `Bearer ${token.access_token}`,
+//             'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+//           },
+//         });
+
+//         if (userResponese.status === 200) {
+//           const userInfo = await userResponese.json();
+//           // 로그인 구현
+//           navigate('/');
+//         }
+//       }
+//     }
+//     loginFetch();
+//   }, []);
+
+//   return <div>KakaoRedirectHandler</div>;
+// }
+
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +65,8 @@ const KakaoRedirectHandler = () => {
     const KAKAO_CLIENT_ID = '2be90ab71a1f36d735f12cd91b53a982';
     const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
 
+    console.log(CODE);
+
     async function loginFetch() {
       const tokenResponse = await fetch(
         `https://kauth.kakao.com/oauth/token?grant_type=${GRANT_TYPE}&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&code=${CODE}`,
@@ -28,6 +81,8 @@ const KakaoRedirectHandler = () => {
       if (tokenResponse.status === 200) {
         const tokenData = await tokenResponse.json();
 
+        console.log(tokenData);
+
         const userResponese = await fetch(`https://kapi.kakao.com/v2/user/me`, {
           method: 'POST',
           headers: {
@@ -38,6 +93,8 @@ const KakaoRedirectHandler = () => {
 
         if (userResponese.status === 200) {
           const userKaKaoInfo = await userResponese.json();
+
+          console.log(userKaKaoInfo);
 
           const userLoginInfo = {
             email: userKaKaoInfo.kakao_account.email,

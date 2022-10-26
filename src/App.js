@@ -7,6 +7,8 @@ import Join from './pages/Join';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import NotLogin from './pages/NotLogin';
+import File from './pages/File';
+import List from './pages/List';
 
 function App() {
   const isLogin = useSelector((state) => state.users.isLogin);
@@ -19,6 +21,9 @@ function App() {
       <Route path="/join" element={<Join />} />
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/file" element={<File />} />
+      <Route path="/list/" element={<List />} />
+      <Route path="/list/:where" element={<List />} />
       <Route path="/notLogin" element={<NotLogin />} />
       <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
     </Routes>
