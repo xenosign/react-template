@@ -150,7 +150,7 @@ export default function Login() {
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link to="/login">
-                    회원 가입이 필요하나요? 회원가입 페이지로 이동
+                    회원 가입이 필요하나요? 회원가입 페이지로 이동!
                   </Link>
                 </Grid>
               </Grid>
