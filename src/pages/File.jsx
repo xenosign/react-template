@@ -37,6 +37,9 @@ export default function File() {
   return (
     <>
       <a href={KAKAO_AUTH_URL}> 11 {params} </a>
+      <br />
+      <input type="file" name="img" onChange={changeHandler} />
+      <img src="http://localhost:3500/uploads/img_1666761620939" />
     </>
   );
 }
