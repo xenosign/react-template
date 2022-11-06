@@ -12,7 +12,8 @@ const KakaoRedirectHandler = () => {
     const GRANT_TYPE = 'authorization_code';
     // REST API 키를 입력 해야 합니다!
     const KAKAO_CLIENT_ID = '2be90ab71a1f36d735f12cd91b53a982';
-    const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+    const KAKAO_REDIRECT_URI =
+      'http://13.125.189.105:3000/oauth/callback/kakao';
 
     console.log(CODE);
 
@@ -51,7 +52,7 @@ const KakaoRedirectHandler = () => {
           };
 
           const registerResponse = await fetch(
-            'http://localhost:3500/users/register',
+            'http://13.125.189.105:3500/users/register',
             {
               method: 'POST',
               headers: {
