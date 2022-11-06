@@ -39,18 +39,21 @@ export default function Join() {
       userNickNameInput.current.value !== ''
     ) {
       // 백엔드 서버로 회원 가입 정보 전달
-      const response = await fetch('http://localhost:3500/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: 'local',
-          email: userEmailInput.current.value,
-          password: userPasswordInput.current.value,
-          nickName: userNickNameInput.current.value,
-        }),
-      });
+      const response = await fetch(
+        'http://ip-172-31-40-13.ap-northeast-2.compute.internal:3500/users/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type: 'local',
+            email: userEmailInput.current.value,
+            password: userPasswordInput.current.value,
+            nickName: userNickNameInput.current.value,
+          }),
+        }
+      );
 
       // 회원 가입 성공 여부에 따른 결과 처리
       if (response.status === 200) {

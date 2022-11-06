@@ -50,20 +50,20 @@ const KakaoRedirectHandler = () => {
             nickName: userKaKaoInfo.kakao_account.profile.nickname,
           };
 
-          // const registerResponse = await fetch(
-          //   'http://localhost:3500/users/register',
-          //   {
-          //     method: 'POST',
-          //     headers: {
-          //       'Content-Type': 'application/json',
-          //     },
-          //     body: JSON.stringify({
-          //       type: 'kakao',
-          //       email: userKaKaoInfo.kakao_account.email,
-          //       nickName: userKaKaoInfo.kakao_account.profile.nickname,
-          //     }),
-          //   }
-          // );
+          const registerResponse = await fetch(
+            'http://localhost:3500/users/register',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                type: 'kakao',
+                email: userKaKaoInfo.kakao_account.email,
+                nickName: userKaKaoInfo.kakao_account.profile.nickname,
+              }),
+            }
+          );
 
           if (200) {
             dispatch(login(userLoginInfo));
