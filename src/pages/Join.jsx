@@ -40,7 +40,7 @@ export default function Join() {
     ) {
       // 백엔드 서버로 회원 가입 정보 전달
       const response = await fetch(
-        'http://ip-172-31-40-13.ap-northeast-2.compute.internal:3500/users/register',
+        'http://13.125.189.105:3500/users/register',
         {
           method: 'POST',
           headers: {

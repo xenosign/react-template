@@ -45,16 +45,13 @@ export default function Login() {
       userEmailInput.current.value !== '' &&
       userPasswordInput.current.value !== ''
     ) {
-      const response = await fetch(
-        'http://ip-172-31-40-13.ap-northeast-2.compute.internal:3500/users/login ',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(loginInfo),
-        }
-      );
+      const response = await fetch('http://13.125.189.105:3500/users/login ', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginInfo),
+      });
 
       if (response.status === 200) {
         const result = await response.json();
